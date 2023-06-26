@@ -127,14 +127,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         mapView.getOverlayManager().add(firstMarker);
         mapView.invalidate();
         firstMarker.showInfoWindow();
-        firstMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker, MapView mapView) {
-                firstMarker.setInfoWindow(infoWindow);
-                BottomSheetFragment bottomSheetFragment = BottomSheetFragment.newInstance(innerDrawableOne, marker.getTitle(), marker.getSnippet().substring(5), "02.10.95");
-                bottomSheetFragment.show(getSupportFragmentManager(), "bottom_sheet_fragment");
-                return true;
-            }
+        firstMarker.setOnMarkerClickListener((marker, mapView) -> {
+            firstMarker.setInfoWindow(infoWindow);
+            BottomSheetFragment bottomSheetFragment = BottomSheetFragment.newInstance(innerDrawableOne, marker.getTitle(), marker.getSnippet().substring(5), "02.10.95");
+            bottomSheetFragment.show(getSupportFragmentManager(), "bottom_sheet_fragment");
+            return true;
         });
     }
 
@@ -172,13 +169,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         mapView.getOverlayManager().add(firstMarker);
         mapView.invalidate();
         firstMarker.showInfoWindow();
-        firstMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker, MapView mapView) {
-                BottomSheetFragment bottomSheetFragment = BottomSheetFragment.newInstance(innerDrawableTwo, marker.getTitle(), marker.getSnippet().substring(5), "26.07.03");
-                bottomSheetFragment.show(getSupportFragmentManager(), "bottom_sheet_fragment");
-                return true;
-            }
+        firstMarker.setOnMarkerClickListener((marker, mapView) -> {
+            BottomSheetFragment bottomSheetFragment = BottomSheetFragment.newInstance(innerDrawableTwo, marker.getTitle(), marker.getSnippet().substring(5), "26.07.03");
+            bottomSheetFragment.show(getSupportFragmentManager(), "bottom_sheet_fragment");
+            return true;
         });
     }
 
@@ -215,13 +209,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         mapView.getOverlayManager().add(firstMarker);
         mapView.invalidate();
         firstMarker.showInfoWindow();
-        firstMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker, MapView mapView) {
-                BottomSheetFragment bottomSheetFragment = BottomSheetFragment.newInstance(innerDrawableThree, marker.getTitle(), marker.getSnippet().substring(5), "15.05.99");
-                bottomSheetFragment.show(getSupportFragmentManager(), "bottom_sheet_fragment");
-                return true;
-            }
+        firstMarker.setOnMarkerClickListener((marker, mapView) -> {
+            BottomSheetFragment bottomSheetFragment = BottomSheetFragment.newInstance(innerDrawableThree, marker.getTitle(), marker.getSnippet().substring(5), "15.05.99");
+            bottomSheetFragment.show(getSupportFragmentManager(), "bottom_sheet_fragment");
+            return true;
         });
     }
 
@@ -243,25 +234,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     private void setAllBinds() {
-        myLocationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mapView.getController().animateTo(currentLocation);
-                mapView.getController().setZoom(18.0);
-            }
+        myLocationButton.setOnClickListener(v -> {
+            mapView.getController().animateTo(currentLocation);
+            mapView.getController().setZoom(18.0);
         });
-        zoomInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mapView.getController().zoomIn();
-            }
-        });
-        zoomOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mapView.getController().zoomOut();
-            }
-        });
+        zoomInButton.setOnClickListener(v -> mapView.getController().zoomIn());
+        zoomOutButton.setOnClickListener(v -> mapView.getController().zoomOut());
     }
 
 
